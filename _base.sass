@@ -1,0 +1,158 @@
+@import compass/css3
+@import compass/utilities
+
+*
+  +box-sizing(border-box)
+
+  &:before, &:after
+    content: ''
+
+@function black($opacity)
+  @return rgba(0,0,0,$opacity)
+
+@function white($opacity)
+  @return rgba(255,255,255,$opacity)
+
+@function greyscale($amount, $opacity:1)
+  @return rgba($amount,$amount,$amount,$opacity)
+
+// Mixin to create overlays over a div using :before or :after
+=overlay($type:'after')
+  position: relative
+
+  @if $type == after
+    &:after
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
+      pointer-events: none
+      @content
+
+  @if $type == before
+    &:before
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
+      pointer-events: none
+      @content
+
+// Mixing to style placeholders
+=placeholder
+  &.placeholder
+    @content
+
+  &:-moz-placeholder
+    @content
+
+  &::-webkit-input-placeholder
+    @content
+
+// Mixin to create breakpoints easily
+=respond-to($media)
+  @if $media == high-dpi
+    @media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5)
+      @content
+
+  @if $media == collapsed
+    @media only screen and (max-width: 767px)
+      @content
+
+  @else
+    @media only screen and (max-width: $media)
+      @content
+
+// Mixin to setup webfonts when loading via typekit, prevents
+// flash of unstyled text
+=font
+  font-family: 'Typekit Font Here', serif
+  text-transform: none
+  visibility: visible
+  font-weight: normal
+
+  .wf-active &
+    visibility: visible
+
+// Mixin to create horizontal lists, either with
+// inline-block or float
+=horizontal-list($type:'inline-block')
+  margin: 0
+  padding: 0
+
+  @if $type == inline-block
+    font-size: 0px
+
+    & > li
+      +inline-block()
+      list-style: none
+      font-size: 18px
+
+      & > a
+        text-decoration: none
+
+  @if $type == float
+    +clearfix()
+
+    & > li
+      list-style: none
+      float: left
+
+      & > a
+        text-decoration: none
+
+// Apply this to a nav element with markup like this
+//
+   <nav>
+     <a href="#" class="show-nav-button">Show Nav</a>
+     <ul>
+       <li><a href="#">Link Items</a></li>
+       <li><a href="#">Link Items</a></li>
+       <li><a href="#">Link Items</a></li>
+     </ul>
+   </nav>
+
+// Then toggle the 'nav-is-active' class on the nav
+// element (or any parent of the nav element).
+
+=basic-responsive-nav
+  & > ul
+    font-size: 0px
+    margin: 0
+    padding: 0
+
+    & > li
+      +inline-block()
+      list-style: none
+      font-size: 18px
+
+      & > a
+        text-decoration: none
+
+  .show-nav-button
+    display: none
+    text-decoration: none
+
+  +respond-to(collapsed)
+    & > ul
+      max-height: 0px
+      +single-transition(max-height, .3s)
+      overflow: hidden
+
+      .nav-is-active &
+        max-height: 2000px
+        overflow: visible
+
+      & > li
+        font-size: 18px
+        display: block
+
+        & > a
+          display: block
+
+    .show-nav-button
+      display: block
