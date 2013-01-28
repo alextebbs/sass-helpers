@@ -14,6 +14,13 @@ $widescreen-width: 1920px
 $low-height: 900px
 $lower-height: 640px
 
+// Text sizing and baseline
+$baseline: 28px
+$font-size: 18px
+
+$bl: $baseline
+$fs: $font-size
+
 // --------------------------------------------------------
 // MIXINS
 // --------------------------------------------------------
@@ -84,7 +91,7 @@ $lower-height: 640px
   &::-webkit-input-placeholder
     @content
 
-// Mixin to create breakpoints easily
+// Mixin to create breakpoints easily and without nasty media query syntax
 =respond-to($media)
   @if $media == high-dpi
     @media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5)
