@@ -164,12 +164,14 @@ $fs: $font-size
   padding: 0
 
   @if $type == inline-block
+    // This removes the spacing between <li> elements added by default
+    // Impossible to remove without setting the <ul> to font-size: 0px
     font-size: 0px
 
     & > li
       +inline-block()
       list-style: none
-      font-size: 18px
+      font-size: $font-size
 
       & > a
         text-decoration: none
@@ -207,7 +209,7 @@ $fs: $font-size
     & > li
       +inline-block()
       list-style: none
-      font-size: 18px
+      font-size: $font-size
 
       & > a
         text-decoration: none
@@ -227,7 +229,7 @@ $fs: $font-size
         overflow: visible
 
       & > li
-        font-size: 18px
+        font-size: $font-size
         display: block
 
         & > a
