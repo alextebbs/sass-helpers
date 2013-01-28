@@ -41,6 +41,12 @@ $lower-height: 640px
   @if $height
     height: $height
 
+// Easy circle-making
+=circle($size)
+  width: $size
+  height: $size
+  +border-radius($size / 2)
+
 // Mixin to create overlays over a div using :before or :after
 =overlay($type:'after')
   position: relative
