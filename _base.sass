@@ -1,6 +1,23 @@
 @import compass/css3
 @import compass/utilities
 
+// --------------------------------------------------------
+// VARIABLES
+// --------------------------------------------------------
+
+// Breakpoints (change as needed)
+$super-mobile-width: 460px
+$mobile-width: 670px
+$tablet-width: 1024px
+$desktop-width: 1200px
+$widescreen-width: 1920px
+$low-height: 900px
+$lower-height: 640px
+
+// --------------------------------------------------------
+// MIXINS
+// --------------------------------------------------------
+
 *
   +box-sizing(border-box)
 
@@ -66,12 +83,48 @@
     @media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5)
       @content
 
-  @if $media == collapsed
-    @media only screen and (max-width: 767px)
+  @if $media == low-height
+    @media only screen and (max-height: $low-height)
+      @content
+
+  @if $media == lower-height
+    @media only screen and (max-height: $lower-height)
+      @content
+
+  @if $media == above-super-mobile
+    @media only screen and (min-width: $super-mobile-width)
+      @content
+
+  @if $media == below-super-mobile
+    @media only screen and (max-width: $super-mobile-width - 1px)
+      @content
+
+  @if $media == above-mobile
+    @media only screen and (min-width: $mobile-width)
+      @content
+
+  @if $media == below-mobile
+    @media only screen and (max-width: $mobile-width - 1px)
+      @content
+
+  @if $media == above-tablet
+    @media only screen and (min-width: $tablet-width)
+      @content
+
+  @if $media == below-tablet
+    @media only screen and (max-width: $tablet-width - 1px)
+      @content
+
+  @if $media == above-desktop
+    @media only screen and (min-width: $desktop-width)
+      @content
+
+  @if $media == below-desktop
+    @media only screen and (max-width: $desktop-width - 1px)
       @content
 
   @else
-    @media only screen and (max-width: $media)
+    @media only screen and (min-width: $media)
       @content
 
 // Mixin to setup webfonts when loading via typekit, prevents
