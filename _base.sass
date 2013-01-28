@@ -1,3 +1,7 @@
+// Here are some of the Sass mixins I use. You'll probably want to 
+// modify this file to suit your needs per-project, so you'll need to
+// include it for each project you do. 
+
 @import compass/css3
 @import compass/utilities
 
@@ -22,12 +26,13 @@ $bl: $baseline
 $fs: $font-size
 
 // --------------------------------------------------------
-// MIXINS
+// MIXINS, FUNCTIONS, AND A LITTLE RESET
 // --------------------------------------------------------
 
 *
   +box-sizing(border-box)
 
+  // No need to keep writing this every time
   &:before, &:after
     content: ''
 
