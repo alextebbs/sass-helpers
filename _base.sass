@@ -33,6 +33,7 @@ $lower-height: 640px
 @function greyscale($amount, $opacity:1)
   @return rgba($amount,$amount,$amount,$opacity)
 
+// Quick sizing without width and height
 =size($width, $height)
   @if $width
     width: $width
