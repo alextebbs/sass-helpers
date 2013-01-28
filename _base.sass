@@ -16,6 +16,13 @@
 @function greyscale($amount, $opacity:1)
   @return rgba($amount,$amount,$amount,$opacity)
 
+=size($width, $height)
+  @if $width
+    width: $width
+
+  @if $height
+    height: $height
+
 // Mixin to create overlays over a div using :before or :after
 =overlay($type:'after')
   position: relative
@@ -66,10 +73,6 @@
   @else
     @media only screen and (max-width: $media)
       @content
-
-=if-high-dpi
-  @media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5)
-    @content
 
 // Mixin to setup webfonts when loading via typekit, prevents
 // flash of unstyled text
